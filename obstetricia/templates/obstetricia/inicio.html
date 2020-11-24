@@ -1,0 +1,29 @@
+{% extends 'base/base.html' %} 
+{% load static %}
+{% block content %}
+<!-- Card Header - Dropdown -->
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+      <h6 class="m-0 font-weight-bold text-primary">Nuevo Ingreso por Parto Normal</h6>
+      <div class="dropdown no-arrow">
+        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+          <div class="dropdown-header">Clickea</div>
+          <a class="dropdown-item" href="{% url 'obstetricia:nuevo_paciente' %}"><i class="far fa-calendar-plus"></i>Nueva Paciente</a>
+          <a class="dropdown-item" href="{% url 'obstetricia:examen_fisico' %}"><i class="far fa-calendar-plus"></i>Examen Fisico</a>
+          <a class="dropdown-item" href="{% url 'obstetricia:orden_medica_parto' %}"><i class="far fa-calendar-plus"></i>Orden Medica de Parto</a>
+          <a class="dropdown-item" href="{% url 'obstetricia:parto_nuevo' %}"><i class="far fa-calendar-plus"></i>Parto</a>
+          <a class="dropdown-item" href="{% url 'obstetricia:nota_parto' %}"><i class="far fa-calendar-plus"></i>Nota de Parto</a>
+
+        </div>
+      </div>
+    </div>
+
+<h2 class="h3 mb-3 font-weight-normal">Propuesta de un Sistema Digital para el Registro de Pacientes en el servicio de Sala de Parto del Hospital General Dr. Pablo Acosta Ortiz</h2>
+<h2 class="h3 mb-3 font-weight-normal">Autora: Yisel Iliana Cardenas Ruiz</h2>
+<h2 class="h3 mb-3 font-weight-normal">Tutor Metodologico: Dra. Maribel Valera</h2>
+<h2 class="h3 mb-3 font-weight-normal">Tutor Academico: Dr. Alejandro Castillo</h2>
+
+
+{% endblock %}

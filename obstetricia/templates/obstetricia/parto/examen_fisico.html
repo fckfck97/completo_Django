@@ -1,0 +1,103 @@
+{% extends 'base/base.html' %} {% block content %}
+<div class="row d-flex justify-content-center">
+  <div class="col-md-8">
+    <form action="{% url 'obstetricia:examen_fisico' %}" method="POST" autocomplete="off">
+      {% csrf_token %}
+      {% if errors %}
+        <div class="alert alert-warning" role="alert">
+          {% for error in errors %}
+            <span>{{ error }} <a data-url="{% url 'paciente_create' %}" class="js-paciente" title="Añadir otro paciente_obstetricia"><img src="/static/admin/img/icon-addlink.svg" alt="Añadir"></a></span>
+          {% endfor %}
+        </div>
+      {% endif %}
+      {% if success %}
+        <div class="alert alert-success" role="alert">
+          {% for succes in success %}
+            <span>{{ succes }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Examen Fisico</h4>
+           <div class="dropdown no-arrow">
+        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+          <div class="dropdown-header">Clickea</div>
+          <a class="dropdown-item" href="{% url 'obstetricia:nuevo_paciente' %}"><i class="far fa-calendar-plus"></i>Nueva Paciente</a>
+          <a class="dropdown-item" href="{% url 'obstetricia:examen_fisico' %}"><i class="far fa-calendar-plus"></i>Examen Fisico</a>
+          <a class="dropdown-item" href="{% url 'obstetricia:orden_medica_parto' %}"><i class="far fa-calendar-plus"></i>Orden Medica de Parto</a>
+          <a class="dropdown-item" href="{% url 'obstetricia:parto_nuevo' %}"><i class="far fa-calendar-plus"></i>Parto</a>
+          <a class="dropdown-item" href="{% url 'obstetricia:nota_parto' %}"><i class="far fa-calendar-plus"></i>Nota de Parto</a>
+
+        </div>
+      </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="{{ form.name }}">Cédula:</label>
+                {{ form.ci_paciente }}
+              </div>
+              <div class="form-group">
+                <label for="{{ form.name }}">Fre-Respiratoria:</label>
+                {{ form.fr }}
+              </div>
+              <div class="form-group">
+                <label for="{{ form.name }}">Abdomen:</label>
+                {{ form.abdomen }}
+              </div>
+              <div class="form-group">
+                <label for="{{ form.name }}">Cuello Uterino:</label>
+                {{ form.cuello_uterino }}
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="{{ form.name }}">Tension Art:</label>
+                {{ form.ta }}
+              </div>
+              <div class="form-group">
+                <label for="{{ form.name }}">Cardio-Pulmonar:</label>
+                {{ form.cardio_pul }}
+              </div>
+              <div class="form-group">
+                <label for="{{ form.name }}">Feto:</label>
+                {{ form.feto }}
+              </div>
+              <div class="form-group">
+                <label for="{{ form.name }}">Extremidades:</label>
+                {{ form.extremidades }}
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="{{ form.name }}">Fre-Cardiaca:</label>
+                {{ form.fc }}
+              </div>
+              <div class="form-group">
+                <label for="{{ form.name }}">Mamas:</label>
+                {{ form.mamas }}
+              </div>
+              <div class="form-group">
+                <label for="{{ form.name }}">Vagina:</label>
+                {{ form.normoconfigurados }}
+              </div>
+              <div class="form-group">
+                <label for="{{ form.name }}">Neurologico:</label>
+                {{ form.neurologico }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button type="submit" class="btn btn-success float-right" tabindex="13">Guardar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
