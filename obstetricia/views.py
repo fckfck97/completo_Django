@@ -20,10 +20,6 @@ from io import BytesIO
 class Inicio(LoginRequiredMixin, TemplateView):
     template_name = 'obstetricia/inicio.html'
 
-class Perfil(LoginRequiredMixin,TemplateView):
-    template_name = 'obstetricia/parto/perfil.html'
-
-
 class Paciente_Create(LoginRequiredMixin, CreateView):
     template_name = 'obstetricia/parto/paciente_nuevo.html'    
     model = Paciente_obstetricia
@@ -207,6 +203,30 @@ class Parto_Create(LoginRequiredMixin, TemplateView):
     
     def get_context_data(self, *args, **kwargs):
         return {'form': self.form, 'form2': self.form2}
+
+class Buscar_Paciente(LoginRequiredMixin,DetailView):
+    template_name = "obstetricia/parto/resultado.html"
+    model = Paciente_obstetricia, Parto
+    template = 'base/base.html'
+    def post(self, request, *args, **kwargs):
+        try:
+            errors = []
+            if 'cedula' in request.POST:
+                cedula = request.POST['cedula']
+                persona = Paciente_obstetricia.objects.filter(cedula=cedula).exists()
+                if not cedula:
+                    errors.append('Por favor introduce un Numero de Cedula.')
+                elif len(cedula) > 9 or len(cedula) < 7:
+                    errors.append('Por favor introduce un Numero de Cedula de entre 8 caracteres y 9 caracteres.')
+                elif persona == False:
+                    errors.append("No existe un Paciente con el numero de cedula %s proceda a registrarlo."%cedula)
+                else:
+                    paciente = Paciente_obstetricia.objects.filter(cedula=cedula)
+                    for p in paciente:
+                        parto = Parto.objects.all().filter(ci_paciente_id=p.id)
+            return render(request, self.template_name, {'paciente': paciente,'parto':parto}) 
+        except:
+            return render(request,self.template, {'errors': errors})
 
 
 

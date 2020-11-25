@@ -38,11 +38,6 @@
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
-        <a class="nav-link" href="">
-          <i class="fas fa-fw fa-search"></i>
-          <span>Ver registros</span></a>
-      </li>
 
             <!-- Divider -->
       <hr class="sidebar-divider">
@@ -59,7 +54,7 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Ingreso por Obstetricia</h6>
-            <a class="collapse-item" href="{% url 'obstetricia:inicio'%}">Parto Normal</a>
+            <a class="collapse-item" href="{% url 'obstetricia:inicio_parto'%}">Parto Normal</a>
             <a class="collapse-item" href="">Cesarea</a>
             <a class="collapse-item" href="">Legrado</a>
             <a class="collapse-item" href="">Histerectomia</
@@ -138,6 +133,19 @@
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
+                  <!-- Topbar Search -->
+          
+          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action="{% url 'obstetricia:buscar_paciente' %}" method="POST" autocomplete="off">
+            {% csrf_token %}
+            <div class="input-group">
+              <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar Paciente..." aria-label="Search" aria-describedby="basic-addon2" name="cedula">
+              <div class="input-group-append">
+                <button class="btn btn-secondary" type="submit">
+                  <i class="fas fa-search fa-sm"></i>
+                </button>
+              </div>
+            </div>
+          </form>
 
          
 
@@ -171,12 +179,12 @@
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="">
+                <a class="dropdown-item" href="{% url 'base:perfil' pk=user.pk%}">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Perfil
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                <a class="dropdown-item" href="" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Cerrar Sesion
                 </a>

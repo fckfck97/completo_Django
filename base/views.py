@@ -7,3 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 class Home(LoginRequiredMixin,TemplateView):
 	template_name = 'base/base.html'
 	login_url = 'base:login'
+
+class Perfil(LoginRequiredMixin,TemplateView):
+    template_name = 'base/perfil.html'
+    login_url = 'base:login'

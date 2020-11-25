@@ -9,6 +9,7 @@ urlpatterns = [
         name='login'),
 	path('logout/',auth_views.LogoutView.as_view(template_name='base/login.html'),
         name='logout'),
+	path('perfil/<int:pk>/', views.Perfil.as_view(), name='perfil'),
 
 
     ]
