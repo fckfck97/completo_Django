@@ -185,10 +185,6 @@ class Parto_Create(LoginRequiredMixin, TemplateView):
                         exito = self.form.save(commit=False)
                         exito2 = self.form2.save(commit=False)
                         exito.fecha = formatted_date
-                        exito.medico_nombre = request.user.first_name
-                        exito.medico_apellido = request.user.last_name
-                        exito.genero = request.user.genero
-                        exito.rango = request.user.rango
                         exito.save()
                         exito2.ci_paciente = tipo
                         exito2.save()
@@ -224,9 +220,11 @@ class Buscar_Paciente(LoginRequiredMixin,DetailView):
                     paciente = Paciente_obstetricia.objects.filter(cedula=cedula)
                     for p in paciente:
                         parto = Parto.objects.all().filter(ci_paciente_id=p.id)
-            return render(request, self.template_name, {'paciente': paciente,'parto':parto}) 
+                        print(parto)
+                        print(paciente)
+            return render(request, self.template_name, {'paciente': paciente,'parto': parto}) 
         except:
-            return render(request,self.template, {'errors': errors})
+            return render(request,self.template_name, {'errors': errors})
 
 
 

@@ -135,14 +135,12 @@
           </button>
                   <!-- Topbar Search -->
           
-          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action="{% url 'obstetricia:buscar_paciente' %}" method="POST" autocomplete="off">
+          <form action="{% url 'obstetricia:buscar_paciente' %}" method="POST" autocomplete="off">
             {% csrf_token %}
             <div class="input-group">
               <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar Paciente..." aria-label="Search" aria-describedby="basic-addon2" name="cedula">
               <div class="input-group-append">
-                <button class="btn btn-secondary" type="submit">
-                  <i class="fas fa-search fa-sm"></i>
-                </button>
+              <input type="submit" value="Buscar" class="btn btn-success float-right">
               </div>
             </div>
           </form>
