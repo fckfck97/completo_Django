@@ -10,4 +10,6 @@ psycopg2-binary==2.8.6
 reportlab==3.5.44
 requests==2.21.0
 whitenoise==5.2.0
+python-decouple==3.1
+
 
