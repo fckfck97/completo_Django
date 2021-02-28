@@ -9878,7 +9878,11 @@ a:focus {
   background-image: linear-gradient(180deg, #4e73df 10%, #224abe 100%);
   background-size: cover;
 }
-
+.bg-gradient-tres {
+  background-color: #ba68c8;
+  background-image: linear-gradient(180deg, #ba68c8 10%, #224abe 100%);
+  background-size: cover;
+}
 .bg-gradient-secondary {
   background-color: #858796;
   background-image: linear-gradient(180deg, #858796 10%, #60616f 100%);
@@ -10803,11 +10807,13 @@ a:focus {
 }
 
 .bg-login-image {
-  background: url("https://source.unsplash.com/K4mSJ7kc0As/600x800");
-  background-position: center;
-  background-size: cover;
+    /* background: url(https://source.unsplash.com/K4mSJ7kc0As/600x800);
+     */
+    background: url("/static/static-only/img/login-img.png");
+    background-position: center;
+    /* background-size: cover */
+    background-size: 100% 100%;
 }
-
 .bg-register-image {
   background: url("https://source.unsplash.com/Mv9hjnEUHR4/600x800");
   background-position: center;

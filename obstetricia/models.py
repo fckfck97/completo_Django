@@ -1,7 +1,18 @@
 from django.db import models
 from base.models import Modelo
 from django.urls import reverse
+from django.contrib.auth.models import AbstractUser
 
+#extendiendo el usuario de django 
+class Medico_obs(AbstractUser):
+    genero = models.CharField(max_length=10)
+    rango = models.CharField(max_length=30)
+    telefono = models.CharField(max_length=11)
+    trabajo = models.CharField(max_length=100)
+    facebook = models.CharField(max_length=20)
+
+    class Meta:
+        db_table = 'auth_user'
 
 #creando la tabla general de la paciente de obstetricia
 class Paciente_obstetricia(Modelo):

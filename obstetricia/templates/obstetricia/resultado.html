@@ -1,6 +1,13 @@
-{% extends 'base/base.html' %}
-
-{% block content %} 
+{% extends 'base/base.html' %} {% block content %}
+{% include 'obstetricia/parto/modal_parto.html' %} 
+{% if errors %}
+        <div class="alert alert-warning" role="alert">
+          {% for error in errors %}
+            <span>{{ error }}
+            <a class="js-paciente" title="Añadir otro paciente_obstetricia" data-url="{% url 'obstetricia:nuevo_paciente' %}"><img src="/static/admin/img/icon-addlink.svg" alt="Añadir"></a></span>
+          {% endfor %}
+        </div>
+      {% endif %}
   {% if paciente %}
     <div class="row d-flex justify-content-center">
       <div class="col-md-12">

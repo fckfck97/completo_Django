@@ -16,12 +16,12 @@ from reportlab.lib.styles import ParagraphStyle as PS
 from reportlab.lib.colors import pink
 from io import BytesIO
 
-
-class Inicio(LoginRequiredMixin, TemplateView):
-    template_name = 'obstetricia/inicio.html'
+#------Ingreso por Parto Normal-------#
+class InicioParto(LoginRequiredMixin, TemplateView):
+    template_name = 'obstetricia/parto/inicio.html'
 
 class Paciente_Create(LoginRequiredMixin, CreateView):
-    template_name = 'obstetricia/parto/paciente_nuevo.html'    
+    template_name = 'obstetricia/paciente_nuevo.html'    
     model = Paciente_obstetricia
     form_class = Paciente_obstetriciaForm
     def post(self, request, *args, **kwargs):
@@ -185,6 +185,10 @@ class Parto_Create(LoginRequiredMixin, TemplateView):
                         exito = self.form.save(commit=False)
                         exito2 = self.form2.save(commit=False)
                         exito.fecha = formatted_date
+                        exito.medico_nombre = request.user.first_name
+                        exito.medico_apellido = request.user.last_name
+                        exito.genero = request.user.genero
+                        exito.rango = request.user.rango
                         exito.save()
                         exito2.ci_paciente = tipo
                         exito2.save()
@@ -201,9 +205,9 @@ class Parto_Create(LoginRequiredMixin, TemplateView):
         return {'form': self.form, 'form2': self.form2}
 
 class Buscar_Paciente(LoginRequiredMixin,DetailView):
-    template_name = "obstetricia/parto/resultado.html"
+    template_name = "obstetricia/resultado.html"
     model = Paciente_obstetricia, Parto
-    template = 'base/base.html'
+    template = 'obstetricia/parto/inicio.html'
     def post(self, request, *args, **kwargs):
         try:
             errors = []
@@ -220,12 +224,42 @@ class Buscar_Paciente(LoginRequiredMixin,DetailView):
                     paciente = Paciente_obstetricia.objects.filter(cedula=cedula)
                     for p in paciente:
                         parto = Parto.objects.all().filter(ci_paciente_id=p.id)
-                        print(parto)
-                        print(paciente)
             return render(request, self.template_name, {'paciente': paciente,'parto': parto}) 
         except:
             return render(request,self.template_name, {'errors': errors})
 
+class Paciente_Modal(LoginRequiredMixin,CreateView):
+    template_name = "obstetricia/parto/modal_parto.html"
+    form_class = Paciente_obstetriciaForm
+    def post(self, request, *args, **kwargs):
+        data = dict()
+        if request.method == 'POST':
+            form_data = request.POST or None
+            form = self.form_class(form_data)
+            if 'ci_paciente' in request.POST:
+                ci_paciente = request.POST['ci_paciente']
+                persona = Paciente_obstetricia.objects.filter(cedula=ci_paciente).exists()
+                if persona ==  False:
+                    data['form_is_valid'] = True
+                    self.form_valid(form)                    
+                else:
+                    data['form_is_valid'] = False
+                    form =self.form_class()
+        else:
+            form = self.form_class()
+            context = {'form': form}
+            data['html_form'] = render_to_string(self.template_name,context,request=request,)
+            return JsonResponse(data)
+    
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
+    
+    def form_valid(self, form):
+        formatted_date = dateformat.format(timezone.now(), 'Y-m-d h:m:s')
+        self.object = form.save(commit=False)
+        self.object.fecha = formatted_date
+        return super(Paciente_Modal, self).form_valid(form)
+    
 
 
 #Generando el reporte en un pdf con reportlab
@@ -956,3 +990,26 @@ def reporte_examen_fisico(request,pk=None,pk2=None):
         raise Http404("La Examen Fisico no existe, cree un registro de examen fisico para el paciente ")
 
     return redirect('obstetricia:examen_fisico')
+
+
+
+
+#-------Ingreso por Cesarea-------#
+
+class InicioCesarea(LoginRequiredMixin, TemplateView):
+    template_name = 'obstetricia/cesarea/inicio.html'
+
+
+
+
+#-------Ingreso por Legrado-------#
+
+class InicioLegrado(LoginRequiredMixin, TemplateView):
+    template_name = 'obstetricia/legrado/inicio.html'
+
+
+
+#-------Ingreso por histerectomia-------#
+
+class InicioHisterectomia(LoginRequiredMixin, TemplateView):
+    template_name = 'obstetricia/histerectomia/inicio.html'

@@ -1,6 +1,13 @@
 {% extends 'base/base.html' %} 
 {% load static %}
 {% block content %}
+      {% if errors %}
+        <div class="alert alert-warning" role="alert">
+          {% for error in errors %}
+            <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
 <!-- Card Header - Dropdown -->
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
       <h6 class="m-0 font-weight-bold text-primary">Nuevo Ingreso por Parto Normal</h6>
@@ -20,10 +27,7 @@
       </div>
     </div>
 
-<h2 class="h3 mb-3 font-weight-normal">Propuesta de un Sistema Digital para el Registro de Pacientes en el servicio de Sala de Parto del Hospital General Dr. Pablo Acosta Ortiz</h2>
-<h2 class="h3 mb-3 font-weight-normal">Autora: Yisel Iliana Cardenas Ruiz</h2>
-<h2 class="h3 mb-3 font-weight-normal">Tutor Metodologico: Dra. Maribel Valera</h2>
-<h2 class="h3 mb-3 font-weight-normal">Tutor Academico: Dr. Alejandro Castillo</h2>
+<h2 class="h3 mb-3 font-weight-normal">Sistema Digital para el Registro de Pacientes en el servicio de Sala de Parto del Hospital General Dr. Pablo Acosta Ortiz</h2>
 
 
 {% endblock %}

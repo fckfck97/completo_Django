@@ -55,9 +55,9 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Ingreso por Obstetricia</h6>
             <a class="collapse-item" href="{% url 'obstetricia:inicio_parto'%}">Parto Normal</a>
-            <a class="collapse-item" href="">Cesarea</a>
-            <a class="collapse-item" href="">Legrado</a>
-            <a class="collapse-item" href="">Histerectomia</
+            <a class="collapse-item" href="{% url 'obstetricia:inicio_cesarea'%}">Cesarea</a>
+            <a class="collapse-item" href="{% url 'obstetricia:inicio_legrado'%}">Legrado</a>
+            <a class="collapse-item" href="{% url 'obstetricia:inicio_histerectomia'%}">Histerectomia</
           </div>
         </div>
       </li>
@@ -256,6 +256,7 @@
 
   <!-- Custom scripts for all pages-->
   <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+  <script src="{% static 'js/modal.js' %}"></script>
 
 {% block js_page %} {% endblock %}
 </body>
